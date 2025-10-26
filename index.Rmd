@@ -18,28 +18,91 @@ This website showcases my projects for **P8105: Data Science I (Homework 4)** an
 # Now, I will show the result of the Homework 4 about Q_2
 
 Loading the package and datasets
-```{r}
+```{r,setup,include=FALSE}
 library(tidyverse)
 library(plotly)
 library(flexdashboard)
 library(p8105.datasets)
 
-```
-Cleaning the datasets and summary
-```{r}
-# 加载数据
 data("instacart")
+set.seed(123)
 
-# 为了渲染速度，对明细做适度抽样（可按需调大/调小）
-set.seed(1)
-instacart_samp <- instacart %>% sample_n(20000)
-
-# 星期标签（原数据 dow 为 0~6）
-dow_levels <- c("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
-instacart_samp <- instacart_samp %>%
-  mutate(
-    order_dow = factor(order_dow, levels = 0:6, labels = dow_levels),
-    reordered = factor(reordered, levels = c(0,1), labels = c("First time","Reordered"))
-  )
+# Randomly sample 5000 rows to improve rendering speed
+instacart_samp <- instacart |> sample_n(5000)
 ```
+
+
+# Scatter Plot: Hour vs Add-to-Cart (Interactive scatter plot)
+
+
+```{r}
+p_scatter <- instacart_samp |>
+  plot_ly(
+    x = ~order_hour_of_day, 
+    y = ~add_to_cart_order,
+    type = "scatter", 
+    mode = "markers",
+    color = ~reordered,
+    colors = c("#00AFBB", "#E7B800"),
+    alpha = 0.5,
+    text = ~paste("Product:", product_name,
+                  "<br>Order ID:", order_id)
+  ) |>
+  layout(
+    title = "Relationship between shopping hour and add-to-cart order",
+    xaxis = list(title = "Hour of day"),
+    yaxis = list(title = "Add-to-cart order")
+  )
+
+p_scatter
+```
+
+
+
+# Box Plot: Distribution of Add-to-Cart Order by Department
+
+```{r}
+p_box <- instacart_samp |>
+  mutate(department = fct_lump(department, 10)) |>
+  plot_ly(
+    y = ~add_to_cart_order,
+    color = ~department,
+    type = "box",
+    colors = "Set3"
+  ) |>
+  layout(
+    title = "Add-to-cart order by department",
+    yaxis = list(title = "Add-to-cart order")
+  )
+
+p_box
+```
+
+
+
+
+# Bar Chart: Most Frequent Aisles Ordered From
+
+```{r, warning=FALSE}
+p_bar <- instacart_samp |>
+  count(aisle, sort = TRUE) |>
+  slice_head(n = 15) |>
+  mutate(aisle = fct_reorder(aisle, n)) |>
+  plot_ly(
+    x = ~aisle, y = ~n,
+    type = "bar",
+    color = ~aisle,
+    colors = "Blues"
+  ) |>
+  layout(
+    title = "Top 15 Aisles by Order Count",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Number of Orders")
+  )
+
+p_bar
+```
+
+
+
 
