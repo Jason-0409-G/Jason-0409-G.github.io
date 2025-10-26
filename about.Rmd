@@ -1,0 +1,84 @@
+---
+title: "Some introduction about Jason"
+---
+
+# Jian Gao (Nick name: Jason)
+
+📞 **Mobile:** +1 (929) 465 7125 
+📧 **Email:** jiangao0409@163.com  
+
+---
+
+# 👋 Welcome!
+
+Hi, I'm **Jason Gao**, a future M.S. student in *Biostatistics (Genetic Statistics Track)* at **Columbia University** (2025–2027).  
+My interests span **statistical genetics**, **data science**, and **machine learning in health data**.
+
+## 🎓 Education
+
+**Columbia University** — *M.S. in Biostatistics (Genetic Statistics Track)*  
+*Sept. 2025 – June 2027*  
+
+* **Focus**: Statistical genetics, data science, and computational biostatistics.  
+
+* **Core Courses:**  
+
+    *Probability*,*Data Science I*,*Biostatistical Methods I*,*Human Population Genetics*,        *Statistical Inference*,*Biostatistical Methods II*,*Statistical Genetics Modeling*, 
+    *Principles of Epidemiology I*,*Capstone Consulting Seminar*. 
+
+* **Electives:** *Machine Learning*  
+
+* **Expected Research Areas**: Statistical modeling of genomic data, genetic epidemiology, and computational health analytics.
+
+
+
+**University of Liverpool** — *B.Sc. in Mathematics with Finance*  
+*Sept. 2023 – June 2025*  
+- Main courses: Statistics & Probability, Numerical Methods, Financial Mathematics, Corporate Finance, Financial Reporting, Metric Space & Calculus.
+
+**Xi’an Jiaotong-Liverpool University** — *B.Sc. in Actuarial Science* *(Top 10%)*  
+*Sept. 2021 – June 2023*  
+- Main courses: Financial Accounting, Microeconomics, Advanced Linear Algebra, Probability & Statistics, Macroeconomics, Theory of Interest.
+
+---
+
+## 💼 Professional Experience
+
+**Fosun Capital** — *Quantitative Investment Intern*  
+*July 2023 – Jule 2025*  
+- Conducted portfolio analysis identifying *A Tech* as a high-potential asset based on momentum and growth indicators.  
+- Presented investment recommendations to senior management, contributing to a successful strategic decision.  
+- Collaborated with mentors on multiple data-driven investment research projects.
+
+**CSC Financial** — *Quantitative Investment Intern*  
+*June 2023 – July 2023*  
+- Designed and implemented a dynamic investment model integrating “TO SHARE” API data with advanced statistical and machine learning methods.  
+- Applied **mean–variance optimization** and **Monte Carlo simulations** to enhance portfolio performance.  
+- Utilized **Bloomberg Terminal** for real-time data analysis and team collaboration on algorithmic strategies.
+
+---
+
+## 🌱 Extracurricular Activities
+
+**Oliver Wyman Consulting Competition** — *Top 100 / 500+ Teams*  
+- Analyzed urban mobility challenges and proposed sustainable solutions using data from Statista & Euromonitor.  
+- Delivered data-driven presentations using Tableau to industry experts.
+
+**Student Union, Director of External Relations**  
+- Managed partnerships between student organizations and external stakeholders.  
+- Organized large-scale events (talks, outreach, networking) with 1,000+ participants.  
+- Developed leadership, time management, and strategic coordination skills.
+
+---
+
+## 💡 Additional Information
+
+- **Languages:** English (Fluent), Mandarin (Native)  
+- **Technical Skills:** Microsoft Office, Matlab, Maple, R, Python, SPSS  
+
+## ✨ Here are some useful link  about myself !
+* [Linkedin](www.linkedin.com/in/健-高-67806335a)
+
+
+## Link to page within the site
+[About me](about-me.html)

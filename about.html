@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Some introduction about Jason</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="mailto:&lt;jg5037@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/Jason-0409-G/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Some introduction about Jason</h1>
+
+</div>
+
+
+<div id="jian-gao-nick-name-jason" class="section level1">
+<h1>Jian Gao (Nick name: Jason)</h1>
+<p>📞 <strong>Mobile:</strong> +1 (929) 465 7125 📧
+<strong>Email:</strong> <a href="mailto:jiangao0409@163.com"
+class="email">jiangao0409@163.com</a></p>
+<hr />
+</div>
+<div id="welcome" class="section level1">
+<h1>👋 Welcome!</h1>
+<p>Hi, I’m <strong>Jason Gao</strong>, a future M.S. student in
+<em>Biostatistics (Genetic Statistics Track)</em> at <strong>Columbia
+University</strong> (2025–2027).<br />
+My interests span <strong>statistical genetics</strong>, <strong>data
+science</strong>, and <strong>machine learning in health
+data</strong>.</p>
+<div id="education" class="section level2">
+<h2>🎓 Education</h2>
+<p><strong>Columbia University</strong> — <em>M.S. in Biostatistics
+(Genetic Statistics Track)</em><br />
+<em>Sept. 2025 – June 2027</em></p>
+<ul>
+<li><p><strong>Focus</strong>: Statistical genetics, data science, and
+computational biostatistics.</p></li>
+<li><p><strong>Core Courses:</strong></p>
+<p><em>Probability</em>,<em>Data Science I</em>,<em>Biostatistical
+Methods I</em>,<em>Human Population Genetics</em>, <em>Statistical
+Inference</em>,<em>Biostatistical Methods II</em>,<em>Statistical
+Genetics Modeling</em>, <em>Principles of Epidemiology
+I</em>,<em>Capstone Consulting Seminar</em>.</p></li>
+<li><p><strong>Electives:</strong> <em>Machine Learning</em></p></li>
+<li><p><strong>Expected Research Areas</strong>: Statistical modeling of
+genomic data, genetic epidemiology, and computational health
+analytics.</p></li>
+</ul>
+<p><strong>University of Liverpool</strong> — <em>B.Sc. in Mathematics
+with Finance</em><br />
+<em>Sept. 2023 – June 2025</em><br />
+- Main courses: Statistics &amp; Probability, Numerical Methods,
+Financial Mathematics, Corporate Finance, Financial Reporting, Metric
+Space &amp; Calculus.</p>
+<p><strong>Xi’an Jiaotong-Liverpool University</strong> — <em>B.Sc. in
+Actuarial Science</em> <em>(Top 10%)</em><br />
+<em>Sept. 2021 – June 2023</em><br />
+- Main courses: Financial Accounting, Microeconomics, Advanced Linear
+Algebra, Probability &amp; Statistics, Macroeconomics, Theory of
+Interest.</p>
+<hr />
+</div>
+<div id="professional-experience" class="section level2">
+<h2>💼 Professional Experience</h2>
+<p><strong>Fosun Capital</strong> — <em>Quantitative Investment
+Intern</em><br />
+<em>July 2023 – Jule 2025</em><br />
+- Conducted portfolio analysis identifying <em>A Tech</em> as a
+high-potential asset based on momentum and growth indicators.<br />
+- Presented investment recommendations to senior management,
+contributing to a successful strategic decision.<br />
+- Collaborated with mentors on multiple data-driven investment research
+projects.</p>
+<p><strong>CSC Financial</strong> — <em>Quantitative Investment
+Intern</em><br />
+<em>June 2023 – July 2023</em><br />
+- Designed and implemented a dynamic investment model integrating “TO
+SHARE” API data with advanced statistical and machine learning
+methods.<br />
+- Applied <strong>mean–variance optimization</strong> and <strong>Monte
+Carlo simulations</strong> to enhance portfolio performance.<br />
+- Utilized <strong>Bloomberg Terminal</strong> for real-time data
+analysis and team collaboration on algorithmic strategies.</p>
+<hr />
+</div>
+<div id="extracurricular-activities" class="section level2">
+<h2>🌱 Extracurricular Activities</h2>
+<p><strong>Oliver Wyman Consulting Competition</strong> — <em>Top 100 /
+500+ Teams</em><br />
+- Analyzed urban mobility challenges and proposed sustainable solutions
+using data from Statista &amp; Euromonitor.<br />
+- Delivered data-driven presentations using Tableau to industry
+experts.</p>
+<p><strong>Student Union, Director of External Relations</strong><br />
+- Managed partnerships between student organizations and external
+stakeholders.<br />
+- Organized large-scale events (talks, outreach, networking) with 1,000+
+participants.<br />
+- Developed leadership, time management, and strategic coordination
+skills.</p>
+<hr />
+</div>
+<div id="additional-information" class="section level2">
+<h2>💡 Additional Information</h2>
+<ul>
+<li><strong>Languages:</strong> English (Fluent), Mandarin
+(Native)<br />
+</li>
+<li><strong>Technical Skills:</strong> Microsoft Office, Matlab, Maple,
+R, Python, SPSS</li>
+</ul>
+</div>
+<div id="here-are-some-useful-link-about-myself" class="section level2">
+<h2>✨ Here are some useful link about myself !</h2>
+<ul>
+<li><a
+href="www.linkedin.com/in/%E5%81%A5-%E9%AB%98-67806335a">Linkedin</a></li>
+</ul>
+</div>
+<div id="link-to-page-within-the-site" class="section level2">
+<h2>Link to page within the site</h2>
+<p><a href="about-me.html">About me</a></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

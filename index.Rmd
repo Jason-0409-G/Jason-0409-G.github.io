@@ -1,0 +1,45 @@
+---
+title: "Jason Gao | Personal Website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+# Welcome to Jason's Personal Website
+
+This website showcases my projects for **P8105: Data Science I (Homework 4)** and other topics that reflect my personal interests and work.  
+
+* You can learn more [**about me**](about.html) in the **About** section.  
+* If you’d like to connect or explore my other work, feel free to visit my [**GitHub page**](https://github.com/jason-0409-g) — just click the GitHub logo in the top-left corner.  
+* 📧 You can also reach me directly via email at [jiangao0409@foxmail.com](mailto:jiangao0409@foxmail.com) or click the mail logo in the top-left corner.
+
+
+
+# Now, I will show the result of the Homework 4 about Q_2
+
+Loading the package and datasets
+```{r}
+library(tidyverse)
+library(plotly)
+library(flexdashboard)
+library(p8105.datasets)
+
+```
+Cleaning the datasets and summary
+```{r}
+# 加载数据
+data("instacart")
+
+# 为了渲染速度，对明细做适度抽样（可按需调大/调小）
+set.seed(1)
+instacart_samp <- instacart %>% sample_n(20000)
+
+# 星期标签（原数据 dow 为 0~6）
+dow_levels <- c("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
+instacart_samp <- instacart_samp %>%
+  mutate(
+    order_dow = factor(order_dow, levels = 0:6, labels = dow_levels),
+    reordered = factor(reordered, levels = c(0,1), labels = c("First time","Reordered"))
+  )
+```
+
