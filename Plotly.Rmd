@@ -1,0 +1,92 @@
+---
+title: "Plotly"
+author: "Jian Gao-jg5037"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+library(flexdashboard)
+library(p8105.datasets)
+
+data("instacart")
+set.seed(123)
+
+# Set sampling size
+instacart_samp <- instacart |> sample_n(5000)
+```
+
+
+
+
+### Scatter Plot: Hour vs Add-to-Cart (Interactive scatter plot)
+
+```{r}
+p_scatter <- instacart_samp |>
+  plot_ly(
+    x = ~order_hour_of_day,
+    y = ~add_to_cart_order,
+    type = "scatter",
+    mode = "markers",
+    color = ~reordered,
+    colors = c("#00AFBB", "#E7B800"),
+    alpha = 0.5,
+    text = ~ paste(
+      "Product:", product_name,
+      "<br>Order ID:", order_id
+    )
+  ) |>
+  layout(
+    title = "Relationship between shopping hour and add-to-cart order",
+    xaxis = list(title = "Hour of day"),
+    yaxis = list(title = "Add-to-cart order")
+  )
+
+p_scatter
+```
+
+### Box Plot: Distribution of Add-to-Cart Order by Department
+
+```{r}
+p_box <- instacart_samp |>
+  mutate(department = fct_lump(department, 10)) |>
+  plot_ly(
+    y = ~add_to_cart_order,
+    color = ~department,
+    type = "box",
+    colors = "Set3"
+  ) |>
+  layout(
+    title = "Add-to-cart order by department",
+    yaxis = list(title = "Add-to-cart order")
+  )
+
+p_box
+```
+
+
+### Bar Chart: Most Frequent Aisles Ordered From
+
+```{r warning=FALSE}
+p_bar <- instacart_samp |>
+  count(aisle, sort = TRUE) |>
+  slice_head(n = 15) |>
+  mutate(aisle = fct_reorder(aisle, n)) |>
+  plot_ly(
+    x = ~aisle, y = ~n,
+    type = "bar",
+    color = ~aisle,
+    colors = "Blues"
+  ) |>
+  layout(
+    title = "Top 15 Aisles by Order Count",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Number of Orders")
+  )
+
+p_bar
+```
