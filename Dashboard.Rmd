@@ -76,18 +76,23 @@ p_box
 ```{r}
 p_bar <- instacart_samp |>
   count(aisle, sort = TRUE) |>
-  slice_head(n = 15) |>
-  mutate(aisle = fct_reorder(aisle, n)) |>
+  slice_max(n, n = 15) |>
   plot_ly(
-    x = ~aisle, y = ~n,
+    x = ~reorder(aisle, n),
+    y = ~n,
     type = "bar",
     color = ~aisle,
     colors = "Blues"
   ) |>
   layout(
     title = "Top 15 Aisles by Order Count",
-    xaxis = list(title = ""),
-    yaxis = list(title = "Number of Orders")
+    xaxis = list(
+      title = "Aisle",
+      tickangle = -45,     
+      tickfont = list(size = 10) 
+    ),
+    yaxis = list(title = "Number of Orders"),
+    margin = list(b = 120) 
   )
 
 p_bar
