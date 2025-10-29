@@ -14,7 +14,7 @@ library(flexdashboard)
 library(p8105.datasets)
 
 data("instacart")
-set.seed(123)
+set.seed(1)
 
 # Set sampling size
 instacart_samp <- instacart |> sample_n(5000)
@@ -76,7 +76,7 @@ p_bar <- instacart_samp |>
   count(aisle, sort = TRUE) |>
   slice_max(n, n = 15) |>
   plot_ly(
-    x = ~reorder(aisle, n),
+    x = ~ reorder(aisle, n),
     y = ~n,
     type = "bar",
     color = ~aisle,
@@ -86,11 +86,11 @@ p_bar <- instacart_samp |>
     title = "Top 15 Aisles by Order Count",
     xaxis = list(
       title = "Aisle",
-      tickangle = -45,    
+      tickangle = -45,
       tickfont = list(size = 10)
     ),
     yaxis = list(title = "Number of Orders"),
-    margin = list(b = 120) 
+    margin = list(b = 120)
   )
 
 p_bar
